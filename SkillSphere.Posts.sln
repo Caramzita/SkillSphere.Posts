@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35208.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkillSphere.Posts.API", "src\SkillSphere.Posts.API\SkillSphere.Posts.API.csproj", "{ECA02605-AF60-4DA4-A6B7-E0F77053FCBD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkillSphere.Posts.Core", "src\SkillSphere.Posts.Core\SkillSphere.Posts.Core.csproj", "{BBE9E684-FA1B-4651-B67D-344DF9BFFA5F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkillSphere.Posts.DataAccess", "src\SkillSphere.Posts.DataAccess\SkillSphere.Posts.DataAccess.csproj", "{F3D67622-BCEA-4CC3-8345-0AD3FCCF371C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkillSphere.Posts.UseCases", "src\SkillSphere.Posts.UseCases\SkillSphere.Posts.UseCases.csproj", "{758873EA-5D40-4E2C-9F8B-EB6BC56DDBC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillSphere.Posts.Contracts", "src\SkillSphere.Posts.Contracts\SkillSphere.Posts.Contracts.csproj", "{79A7AEE2-7B3D-4DD2-8109-4A7676B7C6AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECA02605-AF60-4DA4-A6B7-E0F77053FCBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECA02605-AF60-4DA4-A6B7-E0F77053FCBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECA02605-AF60-4DA4-A6B7-E0F77053FCBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECA02605-AF60-4DA4-A6B7-E0F77053FCBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBE9E684-FA1B-4651-B67D-344DF9BFFA5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBE9E684-FA1B-4651-B67D-344DF9BFFA5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBE9E684-FA1B-4651-B67D-344DF9BFFA5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBE9E684-FA1B-4651-B67D-344DF9BFFA5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3D67622-BCEA-4CC3-8345-0AD3FCCF371C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D67622-BCEA-4CC3-8345-0AD3FCCF371C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D67622-BCEA-4CC3-8345-0AD3FCCF371C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3D67622-BCEA-4CC3-8345-0AD3FCCF371C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{758873EA-5D40-4E2C-9F8B-EB6BC56DDBC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{758873EA-5D40-4E2C-9F8B-EB6BC56DDBC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{758873EA-5D40-4E2C-9F8B-EB6BC56DDBC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{758873EA-5D40-4E2C-9F8B-EB6BC56DDBC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79A7AEE2-7B3D-4DD2-8109-4A7676B7C6AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79A7AEE2-7B3D-4DD2-8109-4A7676B7C6AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79A7AEE2-7B3D-4DD2-8109-4A7676B7C6AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79A7AEE2-7B3D-4DD2-8109-4A7676B7C6AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1F18F54-3E5A-4377-8F05-631505ED35D8}
+	EndGlobalSection
+EndGlobal

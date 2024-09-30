@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="SkillSphere.Infrastructure.UseCases" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SkillSphere.Posts.Contracts\SkillSphere.Posts.Contracts.csproj" />
+    <ProjectReference Include="..\SkillSphere.Posts.Core\SkillSphere.Posts.Core.csproj" />
+  </ItemGroup>
+
+</Project>
