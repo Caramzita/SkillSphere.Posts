@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace SkillSphere.Posts.UseCases.Posts.Queries.GetAllUserPostsQuery;
 
-public record GetAllUserPostsQuery(Guid UserId) : IStreamRequest<Post>;
+public record GetAllUserPostsQuery(Guid UserId, bool OrderByDescending) : IStreamRequest<Post>;
 
 public class GetAllUserPostsQueryHandler : IStreamRequestHandler<GetAllUserPostsQuery, Post>
 {
@@ -19,7 +19,7 @@ public class GetAllUserPostsQueryHandler : IStreamRequestHandler<GetAllUserPosts
     public async IAsyncEnumerable<Post> Handle(GetAllUserPostsQuery request, 
         [EnumeratorCancellation] CancellationToken cancellationToken)
     {
-        var posts = _postRepository.GetAllUserPosts(request.UserId);
+        var posts = _postRepository.GetAllUserPosts(request.UserId, request.OrderByDescending);
 
         await foreach (var post in posts.WithCancellation(cancellationToken))
         {

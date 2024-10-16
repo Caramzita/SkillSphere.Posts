@@ -14,48 +14,56 @@ public class PostRepository : IPostRepository
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    private IQueryable<Post> GetBaseQuery()
+    public IAsyncEnumerable<Post> GetAllPosts(bool orderByDescending = true)
     {
-        return _context.Posts.AsNoTracking(); 
+        var query = _context.Posts.AsNoTracking();
+        return ApplySorting(query, orderByDescending).AsAsyncEnumerable();
     }
 
-    public IAsyncEnumerable<Post> GetAllPosts()
+    public IAsyncEnumerable<Post> GetAllUserPosts(Guid userId, bool orderByDescending = true)
     {
-        return GetBaseQuery().AsAsyncEnumerable();
-    }
+        var query = _context.Posts.AsNoTracking()
+            .Where(post => post.UserId == userId);
 
-    public IAsyncEnumerable<Post> GetAllUserPosts(Guid userId)
-    {
-        return GetBaseQuery()
-            .Where(post => post.UserId == userId)
-            .AsAsyncEnumerable();
+        return ApplySorting(query, orderByDescending).AsAsyncEnumerable();
     }
 
     public async Task<Post?> GetPostById(Guid postId)
     {
-        return await _context.Posts
-            .FirstOrDefaultAsync(post => post.Id == postId);
+        return await _context.Posts.AsNoTracking()
+            .FirstOrDefaultAsync(post => post.Id == postId)
+            .ConfigureAwait(false);
     }
 
-    public IAsyncEnumerable<Post> GetPostsByGoalId(Guid goalId)
+    public IAsyncEnumerable<Post> GetPostsByGoalId(Guid goalId, bool orderByDescending = true)
     {
-        return GetBaseQuery()
-            .Where(post => post.GoalId == goalId)
-            .AsAsyncEnumerable();
+        var query = _context.Posts.AsNoTracking()
+            .Where(post => post.GoalId == goalId);
+
+        return ApplySorting(query, orderByDescending).AsAsyncEnumerable();
     }
 
-    public IAsyncEnumerable<Post> GetPostsByPostType(PostType postType)
+    public IAsyncEnumerable<Post> GetPostsByPostType(PostType postType, bool orderByDescending = true)
     {
-        return GetBaseQuery()
-            .Where(post => post.Type == postType)
-            .AsAsyncEnumerable();
+        var query = _context.Posts.AsNoTracking()
+            .Where(post => post.Type == postType);
+
+        return ApplySorting(query, orderByDescending).AsAsyncEnumerable();
     }
 
-    public IAsyncEnumerable<Post> GetPostsBySkillId(Guid skillId)
+    public IAsyncEnumerable<Post> GetPostsBySkillIds(List<Guid> skillIds, bool orderByDescending = true)
     {
-        return GetBaseQuery()
-            .Where(post => post.SkillId == skillId)
-            .AsAsyncEnumerable();
+        var query = _context.Posts.AsNoTracking()
+        .Where(post => skillIds.All(skillId => post.SkillIds!.Contains(skillId)) && post.SkillIds!.Count > 0);
+
+        return ApplySorting(query, orderByDescending).AsAsyncEnumerable();
+    }
+
+    private static IQueryable<Post> ApplySorting(IQueryable<Post> query, bool orderByDescending)
+    {
+        return orderByDescending 
+            ? query.OrderByDescending(post => post.CreatedAt) 
+            : query.OrderBy(post => post.CreatedAt);
     }
 
     public async Task CreatePost(Post post)
@@ -72,7 +80,7 @@ public class PostRepository : IPostRepository
 
     public async Task UpdatePost(Post post)
     {
-        _context.Posts.Update(post);
+        _context.Posts.Attach(post);
         await _context.SaveChangesAsync().ConfigureAwait(false);
     }
 }

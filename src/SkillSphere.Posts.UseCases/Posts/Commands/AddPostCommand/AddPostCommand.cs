@@ -11,18 +11,18 @@ public class AddPostCommand : IRequest<Result<Post>>
 
     public PostType Type { get; }
 
-    public Guid UserId { get; }
+    public Guid UserId { get; set; }
 
     public Guid? GoalId { get; }
 
-    public Guid? SkillId { get; }
+    public List<Guid>? SkillIds { get; }
 
-    public AddPostCommand(string content, PostType type, Guid userId, Guid? goalId = null, Guid? skillId = null)
+    public AddPostCommand(string content, PostType type, 
+        Guid? goalId = null, List<Guid>? skillIds = null)
     {
         Content = content;
-        UserId = userId;
         Type = type;
         GoalId = goalId;
-        SkillId = skillId;
+        SkillIds = skillIds;
     }
 }

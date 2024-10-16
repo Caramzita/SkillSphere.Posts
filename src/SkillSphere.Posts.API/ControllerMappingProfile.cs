@@ -9,8 +9,8 @@ public class ControllerMappingProfile : Profile
 {
     public ControllerMappingProfile()
     {
-        CreateMap<PostDto, AddPostCommand>();
+        CreateMap<PostRequestDto, AddPostCommand>();
 
-        CreateMap<PostDto, UpdatePostCommand>();
+        CreateMap<PostRequestDto, UpdatePostCommand>();
     }
 }

@@ -2,15 +2,13 @@
 
 namespace SkillSphere.Posts.Contracts.DTOs;
 
-public class PostDto
+public class PostRequestDto
 {
-    public Guid UserId { get; set; }
-
-    public string Content { get; set; }
+    public string Content { get; set; } = string.Empty;
 
     public PostType Type { get; set; }
 
     public Guid? GoalId { get; set; }
 
-    public Guid? SkillId { get; set; }
+    public List<Guid>? SkillIds { get; set; }
 }

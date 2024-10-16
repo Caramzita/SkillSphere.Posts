@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -20,7 +21,7 @@ namespace SkillSphere.Posts.DataAccess.Migrations
                     Content = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
                     Type = table.Column<string>(type: "text", nullable: false),
                     GoalId = table.Column<Guid>(type: "uuid", nullable: true),
-                    SkillId = table.Column<Guid>(type: "uuid", nullable: true),
+                    SkillIds = table.Column<List<Guid>>(type: "uuid[]", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },

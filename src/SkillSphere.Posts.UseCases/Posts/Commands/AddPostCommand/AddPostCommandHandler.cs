@@ -31,21 +31,20 @@ public class AddPostCommandHandler : IRequestHandler<AddPostCommand, Result<Post
             }
         }
 
-        if (request.SkillId.HasValue)
+        if (request.SkillIds != null && request.SkillIds.Count > 0)
         {
-            var skill = await _userProfileServiceClient.GetSkillByIdAsync(request.SkillId.Value);
-
-            if (skill == null)
+            var skills = await _userProfileServiceClient.GetSkillsByIdsAsync(request.SkillIds);
+            if (skills == null || skills.Count != request.SkillIds.Count)
             {
-                return Result<Post>.Invalid("Skill not found.");
+                return Result<Post>.Invalid("Some skills were not found.");
             }
-        };
+        }
 
         var post = new Post(request.UserId, 
             request.Content, 
             request.Type, 
             request.GoalId, 
-            request.SkillId);
+            request.SkillIds);
 
         await _postRepository.CreatePost(post);
 

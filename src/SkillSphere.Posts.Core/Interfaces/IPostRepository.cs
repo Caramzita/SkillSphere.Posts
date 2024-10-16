@@ -5,15 +5,15 @@ namespace SkillSphere.Posts.Core.Interfaces;
 
 public interface IPostRepository
 {
-    IAsyncEnumerable<Post> GetAllPosts();
+    IAsyncEnumerable<Post> GetAllPosts(bool orderByDescending = true);
 
-    IAsyncEnumerable<Post> GetAllUserPosts(Guid userId);
+    IAsyncEnumerable<Post> GetAllUserPosts(Guid userId, bool orderByDescending = true);
 
-    IAsyncEnumerable<Post> GetPostsByGoalId(Guid goalId);
+    IAsyncEnumerable<Post> GetPostsByGoalId(Guid goalId, bool orderByDescending = true);
 
-    IAsyncEnumerable<Post>  GetPostsByPostType(PostType postType);
+    IAsyncEnumerable<Post> GetPostsByPostType(PostType postType, bool orderByDescending = true);
 
-    IAsyncEnumerable<Post>  GetPostsBySkillId(Guid skillId);
+    IAsyncEnumerable<Post> GetPostsBySkillIds(List<Guid> skillIds, bool orderByDescending = true);
 
     Task<Post?> GetPostById(Guid postId);
 

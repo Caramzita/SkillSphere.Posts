@@ -24,13 +24,14 @@ public class PostConfiguration : IEntityTypeConfiguration<Post>
         builder.Property(p => p.GoalId)
             .IsRequired(false);
 
-        builder.Property(p => p.SkillId)
+        builder.Property(p => p.SkillIds)
             .IsRequired(false);
 
         builder.Property(p => p.CreatedAt)
             .IsRequired();
 
         builder.Property(p => p.UpdatedAt)
+            .ValueGeneratedOnUpdate()
             .IsRequired(false);
     }
 }

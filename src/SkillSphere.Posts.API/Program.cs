@@ -14,6 +14,7 @@ using SkillSphere.Posts.Core.Interfaces;
 using SkillSphere.Posts.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 using SkillSphere.Posts.UseCases.Services;
+using System.Text.Json.Serialization;
 
 internal class Program
 {

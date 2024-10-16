@@ -7,8 +7,6 @@ public class UserProfileServiceClient
 {
     private readonly HttpClient _httpClient;
 
-    private readonly string _userProfileService = "https://localhost:7295/api/profiles";
-
     public UserProfileServiceClient(HttpClient httpClient)
     {
         _httpClient = httpClient;
@@ -16,7 +14,7 @@ public class UserProfileServiceClient
 
     public async Task<GoalDto?> GetGoalByIdAsync(Guid goalId)
     {
-        var response = await _httpClient.GetAsync($"https://localhost:7295/api/profiles/goals/{goalId}");
+        var response = await _httpClient.GetAsync($"https://localhost:7295/api/users/profile/goals/{goalId}");
 
         if (response.IsSuccessStatusCode)
         {
@@ -26,13 +24,13 @@ public class UserProfileServiceClient
         return null;
     }
 
-    public async Task<SkillDto?> GetSkillByIdAsync(Guid skillId)
+    public async Task<List<SkillDto>?> GetSkillsByIdsAsync(List<Guid> skillIds)
     {
-        var response = await _httpClient.GetAsync($"{_userProfileService}/skills/{skillId}");
+        var response = await _httpClient.PostAsJsonAsync("https://localhost:7295/api/skills/check-skills", skillIds);
 
         if (response.IsSuccessStatusCode)
         {
-            return await response.Content.ReadFromJsonAsync<SkillDto>();
+            return await response.Content.ReadFromJsonAsync<List<SkillDto>>();
         }
 
         return null;

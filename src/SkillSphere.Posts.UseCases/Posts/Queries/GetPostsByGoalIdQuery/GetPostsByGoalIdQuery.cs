@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace SkillSphere.Posts.UseCases.Posts.Queries.GetPostsByGoalIdQuery;
 
-public record GetPostsByGoalIdQuery(Guid GoalId) : IStreamRequest<Post>;
+public record GetPostsByGoalIdQuery(Guid GoalId, bool OrderByDescending) : IStreamRequest<Post>;
 
 public class GetPostsByGoalIdQueryHandler : IStreamRequestHandler<GetPostsByGoalIdQuery, Post>
 {
@@ -30,7 +30,7 @@ public class GetPostsByGoalIdQueryHandler : IStreamRequestHandler<GetPostsByGoal
             yield break;
         }
 
-        var posts = _postRepository.GetPostsByGoalId(request.GoalId);
+        var posts = _postRepository.GetPostsByGoalId(request.GoalId, request.OrderByDescending);
 
         await foreach (var post in posts.WithCancellation(cancellationToken))
         {

@@ -7,25 +7,22 @@ namespace SkillSphere.Posts.UseCases.Posts.Commands.UpdatePostCommand;
 
 public class UpdatePostCommand : IRequest<Result<Post>>
 {
-    public Guid Id { get; }
+    public Guid Id { get; set; }
+
+    public Guid UserId { get; set; }
 
     public string Content { get; }
 
     public PostType Type { get; }
 
-    public Guid UserId { get; }
+    public List<Guid>? SkillIds { get; }
 
-    public Guid? GoalId { get; }
-
-    public Guid? SkillId { get; }
-
-    public UpdatePostCommand(Guid id, string content, PostType type, Guid userId, Guid? goalId = null, Guid? skillId = null)
+    public UpdatePostCommand(string content, 
+        PostType type, Guid userId, List<Guid>? skillIds = null)
     {
-        Id = id;
         Content = content;
         Type = type;
         UserId = userId;
-        GoalId = goalId;
-        SkillId = skillId;
+        SkillIds = skillIds;
     }
 }

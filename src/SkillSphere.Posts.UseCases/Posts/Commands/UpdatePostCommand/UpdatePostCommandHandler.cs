@@ -27,31 +27,16 @@ public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, Resul
             return Result<Post>.Invalid("Post not found.");
         }
 
-        if (request.GoalId.HasValue)
+        if (request.SkillIds != null && request.SkillIds.Count > 0)
         {
-            var goal = await _userProfileServiceClient.GetGoalByIdAsync(request.GoalId.Value);
-
-            if (goal == null)
+            var skills = await _userProfileServiceClient.GetSkillsByIdsAsync(request.SkillIds);
+            if (skills == null || skills.Count != request.SkillIds.Count)
             {
-                return Result<Post>.Invalid("Goal not found.");
+                return Result<Post>.Invalid("Some skills were not found.");
             }
-
-            post.GoalId = goal.Id;
         }
 
-        if (request.SkillId.HasValue)
-        {
-            var skill = await _userProfileServiceClient.GetSkillByIdAsync(request.SkillId.Value);
-
-            if (skill == null)
-            {
-                return Result<Post>.Invalid("Skill not found.");
-            }
-
-            post.SkillId = skill.Id;
-        }
-
-        post.UpdatePost(request.Content, request.Type);
+        post.UpdatePost(request.Content, request.Type, request.SkillIds);
         await _postRepository.UpdatePost(post);
 
         return Result<Post>.Success(post);

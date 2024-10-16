@@ -14,40 +14,41 @@ public class Post
 
     public Guid? GoalId { get; set; }
 
-    public Guid? SkillId { get; set; }
+    public List<Guid>? SkillIds { get; set; }
 
     public DateTime CreatedAt { get; init; }
 
     public DateTime? UpdatedAt { get; private set; }
 
-    public Post(Guid userId, string content, PostType type, Guid? goalId = null, Guid? skillId = null)
+    public Post(Guid userId, string content, PostType type, Guid? goalId = null, List<Guid>? skillIds = null)
     {
         Id = Guid.NewGuid();
         UserId = userId;
         Content = content;
         Type = type;
         GoalId = goalId;
-        SkillId = skillId;
+        SkillIds = skillIds;
         CreatedAt = DateTime.UtcNow;
     }
 
     public Post(Guid id, Guid userId, string content, PostType type, DateTime createdAt,
-        Guid? goalId = null, Guid? skillId = null, DateTime? updatedAt = null)
+        Guid goalId, List<Guid> skillIds, DateTime updatedAt)
     {
         Id = id;
         UserId = userId;
         Content = content;
         Type = type;
         GoalId = goalId;
-        SkillId = skillId;
+        SkillIds = skillIds;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
     }
 
-    public void UpdatePost(string content, PostType type)
+    public void UpdatePost(string content, PostType type, List<Guid>? skillIds = null)
     {
         Content = content;
         Type = type;
         UpdatedAt = DateTime.UtcNow;
+        SkillIds = skillIds;
     }
 }
