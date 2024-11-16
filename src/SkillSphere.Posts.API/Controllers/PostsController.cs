@@ -7,9 +7,9 @@ using SkillSphere.Infrastructure.UseCases;
 using SkillSphere.Posts.Contracts.DTOs;
 using SkillSphere.Posts.Core.Enums;
 using SkillSphere.Posts.Core.Models;
-using SkillSphere.Posts.UseCases.Posts.Commands.AddPostCommand;
-using SkillSphere.Posts.UseCases.Posts.Commands.DeletePostCommand;
-using SkillSphere.Posts.UseCases.Posts.Commands.UpdatePostCommand;
+using SkillSphere.Posts.UseCases.Posts.Commands.AddPost;
+using SkillSphere.Posts.UseCases.Posts.Commands.DeletePost;
+using SkillSphere.Posts.UseCases.Posts.Commands.UpdatePost;
 using SkillSphere.Posts.UseCases.Posts.Queries.GetAllPosts;
 using SkillSphere.Posts.UseCases.Posts.Queries.GetAllUserPostsQuery;
 using SkillSphere.Posts.UseCases.Posts.Queries.GetPostByIdQuery;
@@ -57,6 +57,8 @@ public class PostsController : ControllerBase
     /// </param>
     [HttpGet]
     [AllowAnonymous]
+    [ProducesResponseType(typeof(IEnumerable<Post>), 200)]
+    [ProducesResponseType(typeof(List<string>), 400)]
     public IAsyncEnumerable<Post> GetAllPosts([FromQuery] bool orderByDescending = true)
     {
         var query = new GetAllPostsQuery(orderByDescending);
@@ -75,6 +77,8 @@ public class PostsController : ControllerBase
     /// </param>
     [HttpGet("user/{userId:guid}")]
     [AllowAnonymous]
+    [ProducesResponseType(typeof(IEnumerable<Post>), 200)]
+    [ProducesResponseType(typeof(List<string>), 400)]
     public IAsyncEnumerable<Post> GetAllUserPosts(Guid userId, 
         [FromQuery] bool orderByDescending = true)
     {
@@ -89,6 +93,8 @@ public class PostsController : ControllerBase
     /// <param name="id"> Идентификатор поста. </param>
     [HttpGet("{id:guid}")]
     [AllowAnonymous]
+    [ProducesResponseType(typeof(Post), 200)]
+    [ProducesResponseType(typeof(List<string>), 400)]
     public async Task<IActionResult> GetPostById(Guid id)
     {
         var query = new GetPostByIdQuery(id);
@@ -109,7 +115,9 @@ public class PostsController : ControllerBase
     /// </param>
     [HttpGet("goal/{goalId:guid}")]
     [AllowAnonymous]
-    public IAsyncEnumerable<Post> GetPostByGoalId(Guid goalId, 
+    [ProducesResponseType(typeof(IEnumerable<Post>), 200)]
+    [ProducesResponseType(typeof(List<string>), 400)]
+    public IAsyncEnumerable<Post> GetPostsByGoalId(Guid goalId, 
         [FromQuery] bool orderByDescending = true)
     {
         var query = new GetPostsByGoalIdQuery(goalId, orderByDescending);
@@ -129,6 +137,8 @@ public class PostsController : ControllerBase
     /// </param>
     [HttpGet("skills")]
     [AllowAnonymous]
+    [ProducesResponseType(typeof(IEnumerable<Post>), 200)]
+    [ProducesResponseType(typeof(List<string>), 400)]
     public IAsyncEnumerable<Post> GetPostBySkillIds(
         [FromQuery] List<Guid> skillIds, 
         [FromQuery] bool orderByDescending = true)
@@ -150,6 +160,8 @@ public class PostsController : ControllerBase
     /// </param>
     [HttpGet("type/{postType}")]
     [AllowAnonymous]
+    [ProducesResponseType(typeof(IEnumerable<Post>), 200)]
+    [ProducesResponseType(typeof(List<string>), 400)]
     public IAsyncEnumerable<Post> GetPostByPostType(PostType postType, 
         [FromQuery] bool orderByDescending = true)
     {
@@ -163,6 +175,8 @@ public class PostsController : ControllerBase
     /// </summary>
     /// <param name="postDto"> Модель данных поста. </param>
     [HttpPost]
+    [ProducesResponseType(typeof(Post), 200)]
+    [ProducesResponseType(typeof(List<string>), 400)]
     public async Task<IActionResult> CreatePost([FromBody] PostRequestDto postDto)
     {
         var command = _mapper.Map<AddPostCommand>(postDto);
@@ -179,6 +193,8 @@ public class PostsController : ControllerBase
     /// <param name="id"> Идентификатор поста. </param>
     /// <param name="postDto"> Модель данных поста. </param>
     [HttpPatch("{id:guid}")]
+    [ProducesResponseType(typeof(Post), 200)]
+    [ProducesResponseType(typeof(List<string>), 400)]
     public async Task<IActionResult> UpdatePost(Guid id, [FromBody] PostRequestDto postDto)
     {
         var command = _mapper.Map<UpdatePostCommand>(postDto);
@@ -195,6 +211,8 @@ public class PostsController : ControllerBase
     /// </summary>
     /// <param name="id"> Идентификатор поста. </param>
     [HttpDelete("{id:guid}")]
+    [ProducesResponseType(typeof(Unit), 200)]
+    [ProducesResponseType(typeof(List<string>), 400)]
     public async Task<IActionResult> DeletePost(Guid id)
     {
         var userId = _userAccessor.GetUserId();

@@ -13,7 +13,7 @@ using SkillSphere.Posts.DataAccess;
 namespace SkillSphere.Posts.DataAccess.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20241016003547_Initial")]
+    [Migration("20241103233838_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

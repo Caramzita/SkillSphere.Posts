@@ -4,7 +4,7 @@ using SkillSphere.Posts.Core.Interfaces;
 using SkillSphere.Posts.Core.Models;
 using SkillSphere.Posts.UseCases.Services;
 
-namespace SkillSphere.Posts.UseCases.Posts.Commands.AddPostCommand;
+namespace SkillSphere.Posts.UseCases.Posts.Commands.AddPost;
 
 public class AddPostCommandHandler : IRequestHandler<AddPostCommand, Result<Post>>
 {
@@ -12,7 +12,7 @@ public class AddPostCommandHandler : IRequestHandler<AddPostCommand, Result<Post
 
     private readonly UserProfileServiceClient _userProfileServiceClient;
 
-    public AddPostCommandHandler(IPostRepository postRepository, 
+    public AddPostCommandHandler(IPostRepository postRepository,
         UserProfileServiceClient userProfileServiceClient)
     {
         _postRepository = postRepository ?? throw new ArgumentNullException(nameof(postRepository));
@@ -40,10 +40,10 @@ public class AddPostCommandHandler : IRequestHandler<AddPostCommand, Result<Post
             }
         }
 
-        var post = new Post(request.UserId, 
-            request.Content, 
-            request.Type, 
-            request.GoalId, 
+        var post = new Post(request.UserId,
+            request.Content,
+            request.Type,
+            request.GoalId,
             request.SkillIds);
 
         await _postRepository.CreatePost(post);

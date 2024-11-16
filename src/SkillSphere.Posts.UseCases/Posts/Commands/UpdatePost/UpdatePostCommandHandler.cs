@@ -4,7 +4,7 @@ using SkillSphere.Posts.Core.Interfaces;
 using SkillSphere.Posts.Core.Models;
 using SkillSphere.Posts.UseCases.Services;
 
-namespace SkillSphere.Posts.UseCases.Posts.Commands.UpdatePostCommand;
+namespace SkillSphere.Posts.UseCases.Posts.Commands.UpdatePost;
 
 public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, Result<Post>>
 {
@@ -25,6 +25,11 @@ public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, Resul
         if (post == null)
         {
             return Result<Post>.Invalid("Post not found.");
+        }
+
+        if (post.UserId != request.UserId)
+        {
+            return Result<Post>.Invalid("Error while get post.");
         }
 
         if (request.SkillIds != null && request.SkillIds.Count > 0)

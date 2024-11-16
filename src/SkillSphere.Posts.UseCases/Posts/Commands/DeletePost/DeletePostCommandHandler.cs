@@ -2,7 +2,7 @@
 using SkillSphere.Infrastructure.UseCases;
 using SkillSphere.Posts.Core.Interfaces;
 
-namespace SkillSphere.Posts.UseCases.Posts.Commands.DeletePostCommand;
+namespace SkillSphere.Posts.UseCases.Posts.Commands.DeletePost;
 
 public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, Result<Unit>>
 {
@@ -20,6 +20,11 @@ public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, Resul
         if (post == null)
         {
             return Result<Unit>.Invalid("Post not found.");
+        }
+
+        if (post.UserId != request.UserId)
+        {
+            return Result<Unit>.Invalid("Error while get post.");
         }
 
         await _postRepository.DeletePost(post);

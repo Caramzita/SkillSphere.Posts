@@ -14,7 +14,7 @@ public class UserProfileServiceClient
 
     public async Task<GoalDto?> GetGoalByIdAsync(Guid goalId)
     {
-        var response = await _httpClient.GetAsync($"https://localhost:7295/api/users/profile/goals/{goalId}");
+        var response = await _httpClient.GetAsync($"/api/users/profile/goals/{goalId}");
 
         if (response.IsSuccessStatusCode)
         {
@@ -26,7 +26,7 @@ public class UserProfileServiceClient
 
     public async Task<List<SkillDto>?> GetSkillsByIdsAsync(List<Guid> skillIds)
     {
-        var response = await _httpClient.PostAsJsonAsync("https://localhost:7295/api/skills/check-skills", skillIds);
+        var response = await _httpClient.PostAsJsonAsync("/api/skills/check-skills", skillIds);
 
         if (response.IsSuccessStatusCode)
         {

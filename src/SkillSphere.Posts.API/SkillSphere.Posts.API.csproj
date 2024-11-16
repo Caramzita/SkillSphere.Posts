@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -19,7 +20,7 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
     <PackageReference Include="SkillSphere.Infrastructure.Consul" Version="1.0.0" />
-    <PackageReference Include="SkillSphere.Infrastructure.Security" Version="1.0.3" />
+    <PackageReference Include="SkillSphere.Infrastructure.Security" Version="1.0.6" />
     <PackageReference Include="SkillSphere.Infrastructure.UseCases.DI" Version="1.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
@@ -29,6 +30,10 @@
     <ProjectReference Include="..\SkillSphere.Posts.Core\SkillSphere.Posts.Core.csproj" />
     <ProjectReference Include="..\SkillSphere.Posts.DataAccess\SkillSphere.Posts.DataAccess.csproj" />
     <ProjectReference Include="..\SkillSphere.Posts.UseCases\SkillSphere.Posts.UseCases.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="logs\" />
   </ItemGroup>
 
 </Project>

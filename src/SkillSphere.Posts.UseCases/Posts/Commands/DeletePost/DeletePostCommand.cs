@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using SkillSphere.Infrastructure.UseCases;
 
-namespace SkillSphere.Posts.UseCases.Posts.Commands.DeletePostCommand;
+namespace SkillSphere.Posts.UseCases.Posts.Commands.DeletePost;
 
 public class DeletePostCommand : IRequest<Result<Unit>>
 {
@@ -12,6 +12,6 @@ public class DeletePostCommand : IRequest<Result<Unit>>
     public DeletePostCommand(Guid id, Guid userId)
     {
         Id = id;
-        UserId= userId;
+        UserId = userId;
     }
 }

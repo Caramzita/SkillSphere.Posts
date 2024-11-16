@@ -3,9 +3,9 @@ using SkillSphere.Infrastructure.UseCases;
 using SkillSphere.Posts.Core.Enums;
 using SkillSphere.Posts.Core.Models;
 
-namespace SkillSphere.Posts.UseCases.Posts.Commands.AddPostCommand;
+namespace SkillSphere.Posts.UseCases.Posts.Commands.AddPost;
 
-public class AddPostCommand : IRequest<Result<Post>>
+public class AddPostCommand : IRequest<Result<Post>>, IPostCommand
 {
     public string Content { get; }
 
@@ -17,7 +17,7 @@ public class AddPostCommand : IRequest<Result<Post>>
 
     public List<Guid>? SkillIds { get; }
 
-    public AddPostCommand(string content, PostType type, 
+    public AddPostCommand(string content, PostType type,
         Guid? goalId = null, List<Guid>? skillIds = null)
     {
         Content = content;
