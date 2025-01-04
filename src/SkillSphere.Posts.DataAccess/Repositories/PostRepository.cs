@@ -80,7 +80,7 @@ public class PostRepository : IPostRepository
 
     public async Task UpdatePost(Post post)
     {
-        _context.Posts.Attach(post);
+        _context.Posts.Update(post);
         await _context.SaveChangesAsync().ConfigureAwait(false);
     }
 }

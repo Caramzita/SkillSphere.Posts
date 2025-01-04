@@ -18,11 +18,10 @@ public class UpdatePostCommand : IRequest<Result<Post>>, IPostCommand
     public List<Guid>? SkillIds { get; }
 
     public UpdatePostCommand(string content,
-        PostType type, Guid userId, List<Guid>? skillIds = null)
+        PostType type, List<Guid>? skillIds = null)
     {
         Content = content;
         Type = type;
-        UserId = userId;
         SkillIds = skillIds;
     }
 }
