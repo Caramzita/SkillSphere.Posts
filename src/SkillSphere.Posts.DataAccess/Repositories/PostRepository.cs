@@ -30,7 +30,7 @@ public class PostRepository : IPostRepository
 
     public async Task<Post?> GetPostById(Guid postId)
     {
-        return await _context.Posts.AsNoTracking()
+        return await _context.Posts
             .FirstOrDefaultAsync(post => post.Id == postId)
             .ConfigureAwait(false);
     }

@@ -15,13 +15,16 @@ public class UpdatePostCommand : IRequest<Result<Post>>, IPostCommand
 
     public PostType Type { get; }
 
+    public Guid? GoalId { get; }
+
     public List<Guid>? SkillIds { get; }
 
-    public UpdatePostCommand(string content,
-        PostType type, List<Guid>? skillIds = null)
+    public UpdatePostCommand(string content, 
+        PostType type, List<Guid>? skillIds = null, Guid? goalId = null)
     {
         Content = content;
         Type = type;
         SkillIds = skillIds;
+        GoalId = goalId;
     }
 }

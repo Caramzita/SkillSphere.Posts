@@ -32,6 +32,16 @@ public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, Resul
             return Result<Post>.Invalid("Error while get post.");
         }
 
+        if (request.GoalId.HasValue)
+        {
+            var goal = await _userProfileServiceClient.GetGoalByIdAsync(request.GoalId.Value);
+
+            if (goal == null)
+            {
+                post.GoalId = null;
+            }
+        }
+
         if (request.SkillIds != null && request.SkillIds.Count > 0)
         {
             var skills = await _userProfileServiceClient.GetSkillsByIdsAsync(request.SkillIds);
